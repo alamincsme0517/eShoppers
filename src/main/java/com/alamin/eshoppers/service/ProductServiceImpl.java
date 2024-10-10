@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductDto> findAllProducts() {
+    public List<ProductDto> findAllProductSortedByName() {
         return productRepository.findAllProducts().stream()
                 .map(this::convertToDto)
                 .sorted(Comparator.comparing(ProductDto::getName))

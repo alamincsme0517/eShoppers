@@ -14,7 +14,7 @@ public class Main {
         ProductService productService = new ProductServiceImpl(new ProductRepositoryImpl());
 
         // Get all products using ProductService
-        List<ProductDto> products = productService.findAllProducts();
+        List<ProductDto> products = productService.findAllProductSortedByName();
 
         // Print all products
         System.out.println("All Products:");
