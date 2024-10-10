@@ -1,4 +1,4 @@
-package com.alamin.eshoppers.models;
+package com.alamin.eshoppers.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;

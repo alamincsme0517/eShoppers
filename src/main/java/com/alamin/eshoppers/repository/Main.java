@@ -1,9 +1,9 @@
-package com.alamin.eshoppers.dao;
+package com.alamin.eshoppers.repository;
 
 
 import com.alamin.eshoppers.dto.ProductDto;
-import com.alamin.eshoppers.services.ProductService;
-import com.alamin.eshoppers.services.ProductServiceImpl;
+import com.alamin.eshoppers.service.ProductService;
+import com.alamin.eshoppers.service.ProductServiceImpl;
 
 
 import java.util.List;

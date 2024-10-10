@@ -1,6 +1,6 @@
-package com.alamin.eshoppers.dao;
+package com.alamin.eshoppers.repository;
 
-import com.alamin.eshoppers.models.Product;
+import com.alamin.eshoppers.domain.Product;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.alamin.eshoppers.models;
+package com.alamin.eshoppers.domain;
 
 import java.time.LocalDateTime;
 

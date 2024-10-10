@@ -1,6 +1,5 @@
-package com.alamin.eshoppers.services;
+package com.alamin.eshoppers.service;
 
-import com.alamin.eshoppers.dao.ProductRepository;
 import com.alamin.eshoppers.dto.ProductDto;
 
 import java.util.List;
