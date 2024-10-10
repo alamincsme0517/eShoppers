@@ -13,6 +13,9 @@ repositories {
 ext {
     junitVersion = '5.9.2'
 }
+war {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -25,7 +28,7 @@ dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
     implementation('org.hibernate:hibernate-core:6.2.4.Final')
     implementation('org.glassfish.jaxb:jaxb-runtime:4.0.2')
-    implementation group: 'org.eclipse.jetty', name: 'glassfish-jstl', version: '11.0.24'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
