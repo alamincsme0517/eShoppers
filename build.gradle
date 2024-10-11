@@ -29,6 +29,8 @@ dependencies {
     implementation('org.hibernate:hibernate-core:6.2.4.Final')
     implementation('org.glassfish.jaxb:jaxb-runtime:4.0.2')
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+    implementation 'org.webjars:bootstrap:5.2.0'
+    implementation 'ch.qos.logback:logback-classic:1.4.12'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
