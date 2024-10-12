@@ -1,19 +1,20 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: hp-alamincsme
+  Date: 10/10/2024
+  Time: 8:27 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>eShoppers</title>
 </head>
 <body>
-<h2>Welcome new my web application</h2>
-<h3>Good job</h3>
-<h1><%= "Hello World!" %>
+<h1><%= "Welcome to eShoppers" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
-<h2>Prime Numbers from 1 to 10:</h2>
-<c:set var="start" value="1" />
-<c:set var="end" value="10" />
+<a href="/home">Home</a>
 </body>
 </html>

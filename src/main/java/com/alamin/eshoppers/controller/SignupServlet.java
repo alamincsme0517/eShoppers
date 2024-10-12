@@ -10,22 +10,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
     private final static Logger LOGGER = LoggerFactory.getLogger(SignupServlet.class);
 
-    private UserService userService  = new UserServiceImpl(new UserRepositoryImpl());
+    private UserService userService = new UserServiceImpl(new UserRepositoryImpl());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,27 +30,39 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDto userDto = copyParametersTo(req);
+
         var errors = ValidationUtil.getInstance().validate(userDto);
-        if (! errors.isEmpty()) {
+
+        if (!errors.isEmpty()) {
             LOGGER.info("user send invalid data {}", userDto);
 
             req.setAttribute("userDto", userDto);
             req.setAttribute("errors", errors);
+
             req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
         } else if (userService.isNotUniqueUserName(userDto)) {
             LOGGER.info("Username: {} is already exists", userDto.getUsername());
 
             errors.put("username", "already taken, please use different one");
 
-            req.setAttribute("errors" , errors);
+            req.setAttribute("errors", errors);
             req.setAttribute("userDto", userDto);
-            req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
 
+            req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
+        } else if (userService.isNotUniqueEmail(userDto)) {
+            LOGGER.info("Email: {} is already exists", userDto.getEmail());
+
+            errors.put("email", "already taken, please use different one");
+
+            req.setAttribute("errors", errors);
+            req.setAttribute("userDto", userDto);
+
+            req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
         } else {
             LOGGER.info("User is valid. creating a new user with {}", userDto);
 
             userService.saveUser(userDto);
-            resp.sendRedirect("/home");
+            resp.sendRedirect("/login");
         }
     }
 
@@ -69,7 +75,7 @@ public class SignupServlet extends HttpServlet {
         userDto.setEmail(req.getParameter("email"));
         userDto.setUsername(req.getParameter("username"));
 
-        return userDto ;
+        return userDto;
     }
 
 }

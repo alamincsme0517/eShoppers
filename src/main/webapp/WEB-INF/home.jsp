@@ -1,9 +1,14 @@
 
+<%--home.jsp--%>
+<%@taglib prefix="sec" uri="http://alamin.com/functions" %>
 <%@ include file="includes/header.jsp"%>
 <%@ include file="includes/navigation.jsp"%>
 
 <div class="container mb-5">
     <div class="bg-light py-5 mb-4">
+        <c:if test="${sec:isAuthenticated(pageContext.request)}">
+            <h1>Hello <c:out value="${sec:getCurrentUser(pageContext.request).firstName}"/> </h1>
+        </c:if>
         <h1>Welcome to e-Shoppers!</h1>
         <img src="<c:url value="/images/cart.png" />" style="height: 200px" alt="" />
     </div>

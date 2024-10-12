@@ -58,7 +58,7 @@
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" id="lastName" name="lastName" value="${userDto.lastName}" placeholder="Enter your last name">
             <c:if test="${errors.username != null}">
-                <small class="text-danger">${errors.username}</small>
+                <small class="text-danger">${errors.lastName}</small>
             </c:if>
         </div>
 
