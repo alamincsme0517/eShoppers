@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--footer section--%>
-<footer class="blockquote-footer mt-auto py-3 fixed-bottom">
+<footer class="blockquote-footer bg-gradient mt-auto fixed-bottom">
     <div class="container">
         <span class="text-muted">
             Copyright & reserved eShoppers.com
