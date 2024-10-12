@@ -1,9 +1,15 @@
 package com.alamin.eshoppers.dto;
 
 
+import com.alamin.eshoppers.utils.PasswordEqual;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+@PasswordEqual(
+        first = "password",
+        second = "passwordConfirmed",
+        message = "password and confirm password do not match"
+)
 public class UserDto {
     @NotEmpty
     @Size(min = 4, max = 32)

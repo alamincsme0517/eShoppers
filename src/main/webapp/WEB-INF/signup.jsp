@@ -16,7 +16,7 @@
     <form action="<c:url value="/signup"/>" class="form mb-5" role="form"  method="POST">
         <div class="form-group mb-4">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+            <input type="text" class="form-control" id="username" name="username" value="${userDto.username}" placeholder="Enter username">
             <c:if test="${errors.username != null}">
                 <small class="text-danger">${errors.username}</small>
             </c:if>
@@ -24,7 +24,7 @@
 
         <div class="form-group mb-4">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+            <input type="email" class="form-control" id="email" name="email" value="${userDto.email}" placeholder="example@gmail.com">
             <c:if test="${errors.email != null}">
                 <small class="text-danger">${errors.email}</small>
             </c:if>
@@ -32,7 +32,7 @@
 
         <div class="form-group mb-4">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+            <input type="password" class="form-control" id="password" name="password" value="${userDto.password}" placeholder="Enter password">
             <c:if test="${errors.password != null}">
                 <small class="text-danger">${errors.password}</small>
             </c:if>
@@ -40,7 +40,7 @@
 
         <div class="form-group mb-4">
             <label for="passwordConfirmed">Password Confirmed</label>
-            <input type="password" class="form-control" id="passwordConfirmed" name="passwordConfirmed" placeholder="Enter Confirmed password">
+            <input type="password" class="form-control" id="passwordConfirmed" name="passwordConfirmed" value="${userDto.passwordConfirmed}" placeholder="Enter confirmed password">
             <c:if test="${errors.passwordConfirmed != null}">
                 <small class="text-danger">${errors.passwordConfirmed}</small>
             </c:if>
@@ -48,7 +48,7 @@
 
         <div class="form-group mb-4">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name">
+            <input type="text" class="form-control" id="firstName" name="firstName" value="${userDto.firstName}" placeholder="Enter your first name">
             <c:if test="${errors.firstName != null}">
                 <small class="text-danger">${errors.firstName}</small>
             </c:if>
@@ -56,15 +56,15 @@
 
         <div class="form-group mb-4">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name">
-            <c:if test="${errors.lastName != null}">
-                <small class="text-danger">${errors.lastName}</small>
+            <input type="text" class="form-control" id="lastName" name="lastName" value="${userDto.lastName}" placeholder="Enter your last name">
+            <c:if test="${errors.username != null}">
+                <small class="text-danger">${errors.username}</small>
             </c:if>
         </div>
 
         <hr class="mb-4">
         <div class="form-group" >
-            <button class="btn btn-primary btn-lg" type="submit">Signup</button>
+            <button class="btn btn-primary btn-lg" onclick="return validPassword()" type="submit">Signup</button>
         </div>
     </form>
 </div>

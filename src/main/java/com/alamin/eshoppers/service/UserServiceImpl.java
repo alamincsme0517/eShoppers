@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
+    @Override
+    public boolean isNotUniqueUserName(UserDto userDto) {
+        return userRepository.findByUsername(userDto.getUsername()).isPresent();
+    }
+
     private String encryptedPassword(String password) {
         return password ;
     }

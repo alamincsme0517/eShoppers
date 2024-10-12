@@ -24,7 +24,6 @@ public class HomeServlet extends HttpServlet {
       LOGGER.info("Serving home page");
        List<ProductDto> allProducts = productService.findAllProductSortedByName();
        req.setAttribute("products", allProducts);
-       LOGGER.info("Total product found {} ", allProducts.size());
        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req,resp);
     }
 }

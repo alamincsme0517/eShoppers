@@ -37,15 +37,26 @@ public class SignupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDto userDto = copyParametersTo(req);
         var errors = ValidationUtil.getInstance().validate(userDto);
-        if (errors.isEmpty()) {
-            LOGGER.info("User is valid. creating a new user with {}", userDto);
-            userService.saveUser(userDto);
+        if (! errors.isEmpty()) {
+            LOGGER.info("user send invalid data {}", userDto);
 
-            resp.sendRedirect("/home");
-        } else {
-            LOGGER.info("user send invalid data");
+            req.setAttribute("userDto", userDto);
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
+        } else if (userService.isNotUniqueUserName(userDto)) {
+            LOGGER.info("Username: {} is already exists", userDto.getUsername());
+
+            errors.put("username", "already taken, please use different one");
+
+            req.setAttribute("errors" , errors);
+            req.setAttribute("userDto", userDto);
+            req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
+
+        } else {
+            LOGGER.info("User is valid. creating a new user with {}", userDto);
+
+            userService.saveUser(userDto);
+            resp.sendRedirect("/home");
         }
     }
 
@@ -61,24 +72,4 @@ public class SignupServlet extends HttpServlet {
         return userDto ;
     }
 
-    private Map<String, String> isValid(UserDto userDto) {
-       var validatorFactory = Validation.buildDefaultValidatorFactory();
-       var validator = validatorFactory.getValidator() ;
-
-       Map<String , String> errors = new HashMap<>();
-       Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
-
-       for (ConstraintViolation<UserDto> violation : violations) {
-           String propertyPath =  violation.getPropertyPath().toString();
-           if (errors.containsKey(propertyPath)) {
-               String errorMsg = errors.get(propertyPath);
-               errors.put(propertyPath, errorMsg + " <br/> " + violation.getMessage());
-           } else {
-               errors.put(propertyPath, violation.getMessage());
-           }
-
-       }
-       return errors ;
-
-    }
 }
