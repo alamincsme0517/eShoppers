@@ -4,6 +4,7 @@ import com.alamin.eshoppers.dto.UserDto;
 import com.alamin.eshoppers.repository.UserRepositoryImpl;
 import com.alamin.eshoppers.service.UserService;
 import com.alamin.eshoppers.service.UserServiceImpl;
+import com.alamin.eshoppers.utils.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,7 +36,7 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDto userDto = copyParametersTo(req);
-        Map<String, String> errors = isValid(userDto);
+        var errors = ValidationUtil.getInstance().validate(userDto);
         if (errors.isEmpty()) {
             LOGGER.info("User is valid. creating a new user with {}", userDto);
             userService.saveUser(userDto);
