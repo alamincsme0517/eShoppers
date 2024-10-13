@@ -1,6 +1,7 @@
 
 <%--home.jsp--%>
 <%@taglib prefix="sec" uri="http://alamin.com/functions" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="includes/header.jsp"%>
 <%@ include file="includes/navigation.jsp"%>
 
@@ -28,14 +29,31 @@
                             Price: $
                             <c:out value="${product.price}"/>
                         </p>
-                        <a href="#" class="card-link btn btn-outline-info">
+                        <a href="#" class="card-link btn btn-outline-info"
+                                onclick="addToCart(${product.id})">
                             Add to Cart
                         </a>
+
+                        <form
+                                style="visibility: hidden"
+                                id="addToCart_${product.id}"
+                                action="<c:url value="/add-to-cart?productId=${product.id}"/> "
+                                method="POST">
+                        </form>
                     </div>
                 </div>
             </div>
         </c:forEach>
     </div>
 </div>
+
+<script>
+    function addToCart(productId) {
+        let form = document.getElementById(
+            "addToCart_" + productId
+        )
+        form.submit();
+    }
+</script>
 
 <%@ include file="includes/footer.jsp"%>
