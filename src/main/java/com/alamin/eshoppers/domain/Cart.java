@@ -1,9 +1,12 @@
 package com.alamin.eshoppers.domain;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Cart {
     private Long id;
+    private Set<CartItem> cartItems = new HashSet<>();
     private BigDecimal totalPrice;
     private Integer totalItem;
     private User user;
@@ -14,6 +17,14 @@ public class Cart {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public BigDecimal getTotalPrice() {
