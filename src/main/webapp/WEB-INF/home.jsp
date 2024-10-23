@@ -6,12 +6,37 @@
 <%@ include file="includes/navigation.jsp"%>
 
 <div class="container mb-5">
-    <div class="bg-light py-5 mb-4">
-        <c:if test="${sec:isAuthenticated(pageContext.request)}">
-            <h1>Hello <c:out value="${sec:getCurrentUser(pageContext.request).firstName}"/> </h1>
-        </c:if>
-        <h1>Welcome to e-Shoppers!</h1>
-        <img src="<c:url value="/images/cart.png" />" style="height: 200px" alt="" />
+    <div class="row bg-light py-5 mb-4">
+        <div class="col-6">
+            <c:if test="${sec:isAuthenticated(pageContext.request)}">
+                <h4>Hello <c:out value="${sec:getCurrentUser(pageContext.request).firstName}"/> </h4>
+            </c:if>
+            <h4>Welcome to e-Shoppers!</h4>
+            <img class="card shadow-sm p-3 mb-5 bg-white" src="<c:url value="/images/cart.png" />" style="height: 200px" alt="" />
+        </div>
+        <div class="col-6 mb-5">
+            <c:if
+                test="${cart != null && cart.cartItems.size() > 0}">
+                    <div class="card shadow-sm p-3 mb-5 bg-white">
+                        <div class="card-header">
+                            <h4>Your Cart</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <p>Total Item:
+                                <span class="badge bg-success rounded-pill">
+                                    <c:out value="${cart.totalItem}"/>
+                                </span>
+                            </p>
+                            <p>Total Price: $ <c:out value="${cart.totalPrice}"/> </p>
+                            <p>
+                                <a class="btn btn-outline-info" href="#">Checkout</a>
+                            </p>
+                        </div>
+                    </div>
+            </c:if>
+        </div>
+
     </div>
 
     <div class="row">
