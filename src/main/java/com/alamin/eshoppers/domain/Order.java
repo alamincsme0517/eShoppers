@@ -1,9 +1,13 @@
 package com.alamin.eshoppers.domain;
 
 
+import java.time.LocalDateTime;
+
 public class Order {
     private Long id;
     private Cart cart;
+    private ShippingAddress shippingAddress;
+    private LocalDateTime shippingDate;
     private boolean shipped;
     private User user;
 
@@ -25,6 +29,22 @@ public class Order {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public LocalDateTime getShippingDate() {
+        return shippingDate;
+    }
+
+    public void setShippingDate(LocalDateTime shippingDate) {
+        this.shippingDate = shippingDate;
     }
 
     public boolean isShipped() {
