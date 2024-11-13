@@ -10,7 +10,7 @@ public class CartRepositoryImpl implements CartRepository{
     private static final Map<User, Set<Cart>> CARTS = new ConcurrentHashMap<>();
     @Override
     public Optional<Cart> findByUser(User currentUser) {
-        System.out.println(CARTS);
+
         Set<Cart> carts = CARTS.get(currentUser);
         if (carts != null && ! carts.isEmpty()) {
             Cart cart = (Cart) carts.toArray()[carts.size() -1];
