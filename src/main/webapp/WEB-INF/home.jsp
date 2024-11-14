@@ -39,6 +39,15 @@
 
     </div>
 
+
+    <div class="row mt-4">
+        <c:if test="${message != null}">
+            <div class="alert alert-success">
+                    ${message}
+            </div>
+        </c:if>
+    </div>
+
     <div class="row">
         <c:forEach var="product" items="${products}">
             <div class="col-sm-4">
