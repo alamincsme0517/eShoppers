@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class ShippingAddressDto {
     @NotEmpty
-    private String address; 
+    private String address;
 
     @NotEmpty
     private String address2;
