@@ -78,6 +78,23 @@ public class CartServiceImpl implements CartService{
         updateCart(cart);
     }
 
+    @Override
+    public void deleteProductFromCart(String productId, Cart cart) {
+        Product product = findProduct(productId);
+        deleteProductFromCart(product, cart);
+        updateCart(cart);
+    }
+
+    private void deleteProductFromCart(Product product, Cart cart) {
+        var cartItemOptional = cart.getCartItems()
+                .stream()
+                .filter(cartItem -> cartItem.getProduct().equals(product))
+                .findAny();
+        var cartItem = cartItemOptional.orElseThrow(() -> new CartItemNotFoundException("cartItem not found by product" + product));
+        cart.getCartItems().remove(cartItem);
+        cartItemRepository.remove(cartItem);
+    }
+
     private void removeProductFromCart(Product productToRemove, Cart cart) {
         var itemOptional = cart.getCartItems().stream()
                 .filter(cartItem -> cartItem.getProduct().equals(productToRemove))
