@@ -89,9 +89,6 @@ public class CartServiceImpl implements CartService{
         if (cartItem.getQuantity() > 1) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
             cartItem.setPrice(cartItem.getPrice().subtract(productToRemove.getPrice()));
-            for (CartItem  c: cart.getCartItems()){
-                System.out.println(c.getProduct().getName() + " = " + c.getQuantity());
-            }
             cartItemRepository.update(cartItem);
         } else {
             cart.getCartItems().remove(cartItem);
