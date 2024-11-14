@@ -4,6 +4,7 @@ import com.alamin.eshoppers.domain.Cart;
 import com.alamin.eshoppers.domain.CartItem;
 import com.alamin.eshoppers.domain.Product;
 import com.alamin.eshoppers.domain.User;
+import com.alamin.eshoppers.exceptions.CartItemNotFoundException;
 import com.alamin.eshoppers.exceptions.ProductNotFoundException;
 import com.alamin.eshoppers.repository.CartItemRepository;
 import com.alamin.eshoppers.repository.CartRepository;
@@ -41,15 +42,25 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public void addProductToCart(String productId, Cart cart) {
+
+        Product product = findProduct(productId);
+        addProductToCart(product, cart);
+        updateCart(cart);
+
+    }
+
+
+    private Product findProduct(String productId) {
         if (productId == null || productId.length() == 0) {
             throw new IllegalArgumentException("Product id can not be null!");
         }
         Long id = parseProductId(productId);
 
-        Product product = productRepository.findById(id)
+       return productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found by id : " + id));
+    }
 
-        addProductToCart(product, cart);
+    private void updateCart(Cart cart) {
 
         Integer totalItem = getTotalItem(cart);
         BigDecimal totalPrice = calculatedPrice(cart);
@@ -57,8 +68,35 @@ public class CartServiceImpl implements CartService{
         cart.setTotalItem(totalItem);
         cart.setTotalPrice(totalPrice);
 
-        cartRepository.save(cart);
+        cartRepository.update(cart);
+    }
 
+    @Override
+    public void removeProductFromCart(String productId, Cart cart) {
+        Product product = findProduct(productId);
+        removeProductFromCart(product, cart);
+        updateCart(cart);
+    }
+
+    private void removeProductFromCart(Product productToRemove, Cart cart) {
+        var itemOptional = cart.getCartItems().stream()
+                .filter(cartItem -> cartItem.getProduct().equals(productToRemove))
+                .findAny();
+
+        var cartItem = itemOptional
+                .orElseThrow(() -> new CartItemNotFoundException("Cart not found by product:" + productToRemove));
+
+        if (cartItem.getQuantity() > 1) {
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
+            cartItem.setPrice(cartItem.getPrice().subtract(productToRemove.getPrice()));
+            for (CartItem  c: cart.getCartItems()){
+                System.out.println(c.getProduct().getName() + " = " + c.getQuantity());
+            }
+            cartItemRepository.update(cartItem);
+        } else {
+            cart.getCartItems().remove(cartItem);
+            cartItemRepository.remove(cartItem);
+        }
     }
 
     private BigDecimal calculatedPrice(Cart cart) {
@@ -120,6 +158,5 @@ public class CartServiceImpl implements CartService{
             throw new IllegalArgumentException("Product id must be a number", e);
         }
     }
-
 
 }

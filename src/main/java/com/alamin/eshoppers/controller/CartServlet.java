@@ -5,9 +5,11 @@ import com.alamin.eshoppers.domain.User;
 import com.alamin.eshoppers.repository.CartItemRepositoryImpl;
 import com.alamin.eshoppers.repository.CartRepositoryImpl;
 import com.alamin.eshoppers.repository.ProductRepositoryImpl;
+import com.alamin.eshoppers.service.Action;
 import com.alamin.eshoppers.service.CartService;
 import com.alamin.eshoppers.service.CartServiceImpl;
 import com.alamin.eshoppers.utils.SecurityContext;
+import com.alamin.eshoppers.utils.StringUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,13 +29,32 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var productId = req.getParameter("productId");
-        LOGGER.info("Received request to add product with id : {} to cart", productId );
-
         var cart = getCart(req);
+        var action = req.getParameter("action");
 
+        if (StringUtil.isNotEmpty(action)) {
+            processCart(productId, action, cart);
+            resp.sendRedirect("/checkout");
+            return;
+        }
+
+        LOGGER.info("Received request to add product with id : {} to cart", productId );
         addProductToCart(productId, cart);
-
         resp.sendRedirect("/home");
+
+    }
+
+    private void processCart(String productId, String action, Cart cart) {
+        switch (Action.valueOf(action.toUpperCase())){
+            case ADD :
+                LOGGER.info("Received request to add product with id : {} to cart", productId );
+                cartService.addProductToCart(productId, cart);
+                break;
+            case REMOVE:
+                LOGGER.info("Received request to remove product with id : {} to cart", productId );
+                cartService.removeProductFromCart(productId, cart);
+                break;
+        }
     }
 
     private void addProductToCart(String productId, Cart cart) {

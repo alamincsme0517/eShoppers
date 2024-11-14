@@ -41,7 +41,13 @@ public class HomeServlet extends HttpServlet {
             req.setAttribute("cart" , cart);
         }
 
+
        req.setAttribute("products", allProducts);
        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }
