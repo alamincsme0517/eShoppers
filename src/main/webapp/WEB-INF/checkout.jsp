@@ -43,7 +43,7 @@
                             $ <c:out value="${cartItem.price}"/>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-outline-warning">Remove</a>
+                            <a href="#" class="btn btn-outline-warning" onclick="doAction(${cartItem.product.getId()}, 'delete')">Remove</a>
                         </td>
                     </tr>
                 </c:forEach>
