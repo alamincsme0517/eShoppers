@@ -24,5 +24,10 @@ e-Shoppers is a web application developed to enhance the shopping experience for
 - JavaServer Pages (JSP) 
 - MySQL 
 
-
+![home](https://github.com/user-attachments/assets/adca8208-3e24-46fe-ad05-cd91f8b20869)
+![sign up](https://github.com/user-attachments/assets/e5c13fb5-d3be-401b-8265-d731b58fa3a9)
+![log in](https://github.com/user-attachments/assets/10dac6c9-f7e0-452d-bb2e-be912102896b)
+![form validation](https://github.com/user-attachments/assets/b0d866b0-0026-4fe2-9c40-595f612c03ce)
+![cart](https://github.com/user-attachments/assets/b952dcff-18a8-4dd5-9dec-8d6e08062b54)
+![checkout](https://github.com/user-attachments/assets/c1febf2e-4b84-4df3-a458-5f1ec7c47b94)
 
