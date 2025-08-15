@@ -1,4 +1,4 @@
-package com.alamin.eshoppers.exceptions;
+package com.alamin.eshoppers.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

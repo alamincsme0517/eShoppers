@@ -1,4 +1,4 @@
-package com.alamin.eshoppers.exceptions;
+package com.alamin.eshoppers.exception;
 
 public class CartItemNotFoundException extends RuntimeException {
     public CartItemNotFoundException() {
